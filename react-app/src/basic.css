@@ -62,4 +62,5 @@ a {
 .content_detail{
     margin: 3em;
     font-size: 20px;
+    display: block;
 }
