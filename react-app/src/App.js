@@ -9,7 +9,7 @@ class App extends Component {
     }
     this.changeText = this.changeText.bind(this)
   }
-
+ 
   changeText() {
     this.setState({ text: "world" })
   }
