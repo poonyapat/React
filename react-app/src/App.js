@@ -1,11 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      text : "hello"
+    }
+    this.changeText = this.changeText.bind(this)
+  }
+
+  changeText() {
+    this.setState({text: "world"})
+  }
+
   render() {
     return (
-      <h1>help</h1>
+      <div>
+        <h1>{this.state.text}</h1>
+        <button onClick={this.changeText}>click</button>
+      </div>
     );
   }
 }
