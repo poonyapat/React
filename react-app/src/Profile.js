@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import './basic.css';
 
 class Profile extends Component {
     constructor(props) {
@@ -63,8 +64,8 @@ class Profile extends Component {
 
     render() {
         return (
-            <div>
-                <ul>
+            <div class="content">
+                <ul class="alpha_ul">
                     <ContentSelector content={this.state.general} selector={this.setContent} />
                     <ContentSelector content={this.state.education} selector={this.setContent} />
                     <ContentSelector content={this.state.programming} selector={this.setContent} />
@@ -93,7 +94,7 @@ class ContentSelector extends Component {
 
     render() {
         return (
-            <li onClick={this.changeContent}> {this.state.content.type} </li>
+            <li class="alpha_li" onClick={this.changeContent}> {this.state.content.type} </li>
         )
     }
 }
