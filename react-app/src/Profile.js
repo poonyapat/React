@@ -7,7 +7,7 @@ class Profile extends Component {
         super(props)
         this.state = {
             general: {
-                type: "general",
+                name: "General",
                 firstName: "Poonyapat",
                 lastName: "Yanvisit",
                 age: 20,
@@ -19,7 +19,7 @@ class Profile extends Component {
                 }
             },
             education: {
-                type: "education",
+                name: "Education",
                 primarySchool: "Bangkok Christian College",
                 secondarySchool: "Bangkok Christian College",
                 bachelorsDegree: {
@@ -29,7 +29,7 @@ class Profile extends Component {
                 }
             },
             programming: {
-                type: "programming",
+                name: "Programming",
                 programmingLanguage: {
                     python: "Pandas, Matplotlib and On Studying",
                     java: "Javafx and Maven",
@@ -43,7 +43,7 @@ class Profile extends Component {
                 }
             },
             activity: {
-                type: "activity",
+                name: "Activity",
                 game: ["League of Legend: Ex-Proleague", "Overwatch"],
                 book: ["Novel", "Manga"],
                 bookType: ["Fantasy", "Action", "Drama", "Comedy", "Romance"],
@@ -58,21 +58,25 @@ class Profile extends Component {
 
     setContent(content) {
         this.setState({
-            selectingContent: content.type
+            selectingContent: content
         })
+    }
+
+    componentDidMount(){
+        this.setContent(this.state.general)
     }
 
     render() {
         return (
-            <div class="content">
-                <ul class="alpha_ul">
+            <div className="content">
+                <ul className="alpha_ul">
                     <ContentSelector content={this.state.general} selector={this.setContent} />
                     <ContentSelector content={this.state.education} selector={this.setContent} />
                     <ContentSelector content={this.state.programming} selector={this.setContent} />
                     <ContentSelector content={this.state.activity} selector={this.setContent} />
                 </ul>
                 <div>
-                    {this.state.selectingContent}
+                    <Content content={this.state.selectingContent} />
                 </div>
             </div>
         );
@@ -94,9 +98,52 @@ class ContentSelector extends Component {
 
     render() {
         return (
-            <li class="alpha_li" onClick={this.changeContent}> {this.state.content.type} </li>
+            <li className="alpha_li" onClick={this.changeContent}> {this.state.content.name} </li>
         )
     }
+}
+
+
+class Content extends Component {
+    constructor(props) {
+        super(props)
+    }
+
+    render() {
+        // const content = <p>hello</p>
+        const content = Object.entries(this.props.content).map(([key, value]) => {
+            if (key === "name")
+                return;
+            if (Array.isArray(value))
+                return (
+                    <div>
+                        <p> {key} </p>
+                        <ul>{
+                            Object.entries(value).map(([key, value]) => {
+                                return <li>{value.toString()}</li>
+                            })
+                        }
+                        </ul>
+                    </div>
+                )
+            if (typeof (value) === "object")
+                return (
+                    <ul>{
+                        Object.entries(value).map(([key, value]) => {
+                            return <li>{key}: {value.toString()}</li>
+                        })
+                    }</ul>
+                )
+            return <p>{key}: {value.toString()}</p>
+        })
+
+        return (
+            <div className="content_detail">
+                {content}
+            </div>
+        )
+    }
+
 }
 
 export default Profile;
