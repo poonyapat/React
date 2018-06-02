@@ -16,10 +16,24 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Profile/>
+      <div className="background">
+        <HeaderTab />
+        <Profile />
       </div>
     );
+  }
+}
+
+class HeaderTab extends Component {
+  render() {
+    return (
+      <ul className="alpha_ul alpha_ul_top">
+        <a><li className="alpha_li">Home</li></a>
+        <a><li className="alpha_li">Schedule</li></a>
+        <a><li className="alpha_li">Contact</li></a>
+        <a><li className="alpha_li">About</li></a>
+      </ul>
+    )
   }
 }
 
