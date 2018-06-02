@@ -5,9 +5,8 @@ class Profile extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            selectingContent: "general",
             general: {
-                type: "General",
+                type: "general",
                 firstName: "Poonyapat",
                 lastName: "Yanvisit",
                 age: 20,
@@ -19,7 +18,7 @@ class Profile extends Component {
                 }
             },
             education: {
-                type: "Education",
+                type: "education",
                 primarySchool: "Bangkok Christian College",
                 secondarySchool: "Bangkok Christian College",
                 bachelorsDegree: {
@@ -29,7 +28,7 @@ class Profile extends Component {
                 }
             },
             programming: {
-                type: "Programming",
+                type: "programming",
                 programmingLanguage: {
                     python: "Pandas, Matplotlib and On Studying",
                     java: "Javafx and Maven",
@@ -43,14 +42,14 @@ class Profile extends Component {
                 }
             },
             activity: {
-                type: "Activity",
+                type: "activity",
                 game: ["League of Legend: Ex-Proleague", "Overwatch"],
                 book: ["Novel", "Manga"],
                 bookType: ["Fantasy", "Action", "Drama", "Comedy", "Romance"],
                 others: ["Sleeping", "Running", "Eating", "Learning new knowledge", "Watching Anime/Movie"]
             },
+            selectingContent: "General"
         }
-
         // this.changeContent = this.changeContent.bind(this)
         this.setContent = this.setContent.bind(this)
 
@@ -58,20 +57,18 @@ class Profile extends Component {
 
     setContent(content) {
         this.setState({
-            selectingContent: content
+            selectingContent: content.type
         })
     }
-
-
 
     render() {
         return (
             <div>
                 <ul>
-                    <ContentSelector content="general" selector={this.setContent} />
-                    <ContentSelector content="education" selector={this.setContent} />
-                    <ContentSelector content="programming" selector={this.setContent} />
-                    <ContentSelector content="activity" selector={this.setContent} />
+                    <ContentSelector content={this.state.general} selector={this.setContent} />
+                    <ContentSelector content={this.state.education} selector={this.setContent} />
+                    <ContentSelector content={this.state.programming} selector={this.setContent} />
+                    <ContentSelector content={this.state.activity} selector={this.setContent} />
                 </ul>
                 <div>
                     {this.state.selectingContent}
@@ -96,7 +93,7 @@ class ContentSelector extends Component {
 
     render() {
         return (
-            <li onClick={this.changeContent}> {this.state.content} </li>
+            <li onClick={this.changeContent}> {this.state.content.type} </li>
         )
     }
 }
